@@ -1,0 +1,760 @@
+[gd_scene load_steps=36 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/LevelBase.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/Enemy.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/item/Item.tscn" id="4"]
+[ext_resource type="Texture2D" path="res://assets/tiles/floor_l3.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/tiles/wall_generic.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/tiles/wall_corridor.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/tiles/wall_l3.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/decor/rug_tan.png" id="9"]
+[ext_resource type="Texture2D" path="res://assets/decor/rug_green.png" id="10"]
+[ext_resource type="Texture2D" path="res://assets/decor/arrow.png" id="11"]
+[ext_resource type="Texture2D" path="res://assets/decor/chair.png" id="12"]
+[ext_resource type="Texture2D" path="res://assets/characters/Amelia_idle_anim_16x16.png" id="13"]
+[ext_resource type="Texture2D" path="res://assets/characters/Amelia_run_16x16.png" id="14"]
+[ext_resource type="Texture2D" path="res://assets/characters/Alex_idle_anim_16x16.png" id="15"]
+[ext_resource type="Texture2D" path="res://assets/characters/Alex_run_16x16.png" id="16"]
+[ext_resource type="Texture2D" path="res://assets/decor/wardrobe.png" id="17"]
+[ext_resource type="Texture2D" path="res://assets/decor/desk.png" id="18"]
+[ext_resource type="Texture2D" path="res://assets/decor/floorlamp_blue.png" id="19"]
+[ext_resource type="Texture2D" path="res://assets/decor/plant.png" id="20"]
+[ext_resource type="Texture2D" path="res://assets/decor/globe.png" id="21"]
+[ext_resource type="Texture2D" path="res://assets/decor/plant2.png" id="22"]
+[ext_resource type="Texture2D" path="res://assets/decor/floorlamp_cream.png" id="23"]
+
+[sub_resource type="RectangleShape2D" id="Rect_160x84"]
+size = Vector2(160, 84.0)
+
+[sub_resource type="RectangleShape2D" id="Rect_460x16"]
+size = Vector2(460, 16)
+
+[sub_resource type="RectangleShape2D" id="Rect_160x16"]
+size = Vector2(160, 16)
+
+[sub_resource type="RectangleShape2D" id="Rect_16x270"]
+size = Vector2(16, 270)
+
+[sub_resource type="RectangleShape2D" id="Rect_24x40"]
+size = Vector2(24, 40)
+
+[sub_resource type="RectangleShape2D" id="Rect_28x12"]
+size = Vector2(28, 12)
+
+[sub_resource type="RectangleShape2D" id="Rect_25x11"]
+size = Vector2(25, 11)
+
+[sub_resource type="RectangleShape2D" id="Rect_13x12"]
+size = Vector2(13, 12)
+
+[sub_resource type="RectangleShape2D" id="Rect_16x12"]
+size = Vector2(16, 12)
+
+[sub_resource type="RectangleShape2D" id="Rect_11x9"]
+size = Vector2(11, 9)
+
+[sub_resource type="RectangleShape2D" id="Rect_12x10"]
+size = Vector2(12, 10)
+
+[sub_resource type="RectangleShape2D" id="Rect_11x12"]
+size = Vector2(11, 12)
+
+[node name="Level3" type="Node2D"]
+script = ExtResource("1")
+level_title = "NIVEL 3 - DIFICIL"
+level_width = 1700.0
+
+[node name="Floor0" type="TextureRect" parent="."]
+offset_left = 0
+offset_top = 16.0
+offset_right = 460
+offset_bottom = 254.0
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Floor1" type="TextureRect" parent="."]
+offset_left = 460
+offset_top = 100.0
+offset_right = 620
+offset_bottom = 170.0
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Fill1A" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(540.0, 58.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Fill1A"]
+shape = SubResource("Rect_160x84")
+
+[node name="Texture" type="TextureRect" parent="./Fill1A"]
+offset_left = -80.0
+offset_top = -42.0
+offset_right = 80.0
+offset_bottom = 42.0
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Fill1B" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(540.0, 212.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Fill1B"]
+shape = SubResource("Rect_160x84")
+
+[node name="Texture" type="TextureRect" parent="./Fill1B"]
+offset_left = -80.0
+offset_top = -42.0
+offset_right = 80.0
+offset_bottom = 42.0
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Floor2" type="TextureRect" parent="."]
+offset_left = 620
+offset_top = 16.0
+offset_right = 1080
+offset_bottom = 254.0
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Floor3" type="TextureRect" parent="."]
+offset_left = 1080
+offset_top = 100.0
+offset_right = 1240
+offset_bottom = 170.0
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Fill3A" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(1160.0, 58.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Fill3A"]
+shape = SubResource("Rect_160x84")
+
+[node name="Texture" type="TextureRect" parent="./Fill3A"]
+offset_left = -80.0
+offset_top = -42.0
+offset_right = 80.0
+offset_bottom = 42.0
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Fill3B" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(1160.0, 212.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Fill3B"]
+shape = SubResource("Rect_160x84")
+
+[node name="Texture" type="TextureRect" parent="./Fill3B"]
+offset_left = -80.0
+offset_top = -42.0
+offset_right = 80.0
+offset_bottom = 42.0
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Floor4" type="TextureRect" parent="."]
+offset_left = 1240
+offset_top = 16.0
+offset_right = 1700
+offset_bottom = 254.0
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="WallShade" type="ColorRect" parent="."]
+offset_left = 0
+offset_top = 16.0
+offset_right = 1700
+offset_bottom = 24.0
+color = Color(0, 0, 0, 0.22)
+
+[node name="Top0" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(230.0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Top0"]
+shape = SubResource("Rect_460x16")
+
+[node name="Texture" type="TextureRect" parent="./Top0"]
+offset_left = -230.0
+offset_top = -8.0
+offset_right = 230.0
+offset_bottom = 8.0
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Bot0" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(230.0, 262)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Bot0"]
+shape = SubResource("Rect_460x16")
+
+[node name="Texture" type="TextureRect" parent="./Bot0"]
+offset_left = -230.0
+offset_top = -8.0
+offset_right = 230.0
+offset_bottom = 8.0
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Top1" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(540.0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Top1"]
+shape = SubResource("Rect_160x16")
+
+[node name="Texture" type="TextureRect" parent="./Top1"]
+offset_left = -80.0
+offset_top = -8.0
+offset_right = 80.0
+offset_bottom = 8.0
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Bot1" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(540.0, 262)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Bot1"]
+shape = SubResource("Rect_160x16")
+
+[node name="Texture" type="TextureRect" parent="./Bot1"]
+offset_left = -80.0
+offset_top = -8.0
+offset_right = 80.0
+offset_bottom = 8.0
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Top2" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(850.0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Top2"]
+shape = SubResource("Rect_460x16")
+
+[node name="Texture" type="TextureRect" parent="./Top2"]
+offset_left = -230.0
+offset_top = -8.0
+offset_right = 230.0
+offset_bottom = 8.0
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Bot2" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(850.0, 262)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Bot2"]
+shape = SubResource("Rect_460x16")
+
+[node name="Texture" type="TextureRect" parent="./Bot2"]
+offset_left = -230.0
+offset_top = -8.0
+offset_right = 230.0
+offset_bottom = 8.0
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Top3" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(1160.0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Top3"]
+shape = SubResource("Rect_160x16")
+
+[node name="Texture" type="TextureRect" parent="./Top3"]
+offset_left = -80.0
+offset_top = -8.0
+offset_right = 80.0
+offset_bottom = 8.0
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Bot3" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(1160.0, 262)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Bot3"]
+shape = SubResource("Rect_160x16")
+
+[node name="Texture" type="TextureRect" parent="./Bot3"]
+offset_left = -80.0
+offset_top = -8.0
+offset_right = 80.0
+offset_bottom = 8.0
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Top4" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(1470.0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Top4"]
+shape = SubResource("Rect_460x16")
+
+[node name="Texture" type="TextureRect" parent="./Top4"]
+offset_left = -230.0
+offset_top = -8.0
+offset_right = 230.0
+offset_bottom = 8.0
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="Bot4" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(1470.0, 262)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./Bot4"]
+shape = SubResource("Rect_460x16")
+
+[node name="Texture" type="TextureRect" parent="./Bot4"]
+offset_left = -230.0
+offset_top = -8.0
+offset_right = 230.0
+offset_bottom = 8.0
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="WallLeft" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(8, 135)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./WallLeft"]
+shape = SubResource("Rect_16x270")
+
+[node name="Texture" type="TextureRect" parent="./WallLeft"]
+offset_left = -8.0
+offset_top = -135.0
+offset_right = 8.0
+offset_bottom = 135.0
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="WallRight" type="StaticBody2D" parent="."]
+collision_layer = 2
+position = Vector2(1692, 135)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="./WallRight"]
+shape = SubResource("Rect_16x270")
+
+[node name="Texture" type="TextureRect" parent="./WallRight"]
+offset_left = -8.0
+offset_top = -135.0
+offset_right = 8.0
+offset_bottom = 135.0
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 1
+texture_filter = 1
+
+[node name="FloorDecor0" type="Sprite2D" parent="."]
+position = Vector2(240, 145)
+scale = Vector2(2.0, 2.0)
+texture = ExtResource("9")
+texture_filter = 1
+
+[node name="FloorDecor1" type="Sprite2D" parent="."]
+position = Vector2(850, 145)
+scale = Vector2(2.0, 2.0)
+texture = ExtResource("10")
+texture_filter = 1
+
+[node name="FloorDecor2" type="Sprite2D" parent="."]
+position = Vector2(1460, 145)
+scale = Vector2(2.0, 2.0)
+texture = ExtResource("9")
+texture_filter = 1
+
+[node name="CorridorDecor0" type="Sprite2D" parent="."]
+position = Vector2(475, 45)
+texture = ExtResource("11")
+texture_filter = 1
+
+[node name="CorridorDecor1" type="Sprite2D" parent="."]
+position = Vector2(605, 225)
+texture = ExtResource("11")
+texture_filter = 1
+
+[node name="CorridorDecor2" type="Sprite2D" parent="."]
+position = Vector2(1095, 45)
+texture = ExtResource("11")
+texture_filter = 1
+
+[node name="CorridorDecor3" type="Sprite2D" parent="."]
+position = Vector2(1225, 225)
+texture = ExtResource("11")
+texture_filter = 1
+
+[node name="CorridorDecor4" type="Sprite2D" parent="."]
+position = Vector2(540, 135)
+texture = ExtResource("12")
+texture_filter = 1
+
+[node name="CorridorDecor5" type="Sprite2D" parent="."]
+position = Vector2(1160, 135)
+texture = ExtResource("12")
+texture_filter = 1
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Item1" parent="Items" instance=ExtResource("4")]
+position = Vector2(75, 215)
+
+[node name="Item2" parent="Items" instance=ExtResource("4")]
+position = Vector2(405, 100)
+
+[node name="Item3" parent="Items" instance=ExtResource("4")]
+position = Vector2(700, 215)
+
+[node name="Item4" parent="Items" instance=ExtResource("4")]
+position = Vector2(1000, 90)
+
+[node name="Item5" parent="Items" instance=ExtResource("4")]
+position = Vector2(1300, 215)
+
+[node name="Item6" parent="Items" instance=ExtResource("4")]
+position = Vector2(1640, 90)
+
+[node name="Exit" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 1
+position = Vector2(1660, 135)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource("Rect_24x40")
+
+[node name="Visual" type="ColorRect" parent="Exit"]
+offset_left = -12.0
+offset_top = -20.0
+offset_right = 12.0
+offset_bottom = 20.0
+color = Color(0.85, 0.25, 0.25, 1)
+
+[node name="Label" type="Label" parent="Exit"]
+offset_left = -32.0
+offset_top = -34.0
+offset_right = 32.0
+offset_bottom = -22.0
+theme_override_font_sizes/font_size = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+horizontal_alignment = 1
+text = "CERRADA"
+
+[node name="Arrow" type="Sprite2D" parent="Exit"]
+position = Vector2(-26, 0)
+texture = ExtResource("11")
+texture_filter = 1
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="World" instance=ExtResource("2")]
+position = Vector2(40, 135)
+
+[node name="Enemy1" parent="World" instance=ExtResource("3")]
+position = Vector2(150, 90)
+patrol_distance = 60.0
+speed = 60.0
+health = 2
+score_value = 25
+idle_tex = ExtResource("13")
+run_tex = ExtResource("14")
+
+[node name="Enemy2" parent="World" instance=ExtResource("3")]
+position = Vector2(330, 90)
+patrol_distance = 60.0
+speed = 60.0
+idle_tex = ExtResource("15")
+run_tex = ExtResource("16")
+
+[node name="Enemy3" parent="World" instance=ExtResource("3")]
+position = Vector2(540, 135)
+patrol_distance = 60.0
+speed = 60.0
+vertical = true
+idle_tex = ExtResource("13")
+run_tex = ExtResource("14")
+
+[node name="Enemy4" parent="World" instance=ExtResource("3")]
+position = Vector2(740, 90)
+patrol_distance = 100.0
+speed = 55.0
+idle_tex = ExtResource("15")
+run_tex = ExtResource("16")
+
+[node name="Enemy5" parent="World" instance=ExtResource("3")]
+position = Vector2(920, 210)
+patrol_distance = 100.0
+speed = 55.0
+health = 2
+score_value = 25
+idle_tex = ExtResource("13")
+run_tex = ExtResource("14")
+
+[node name="Enemy6" parent="World" instance=ExtResource("3")]
+position = Vector2(1160, 135)
+patrol_distance = 60.0
+speed = 65.0
+vertical = true
+idle_tex = ExtResource("15")
+run_tex = ExtResource("16")
+
+[node name="Enemy7" parent="World" instance=ExtResource("3")]
+position = Vector2(1350, 90)
+patrol_distance = 110.0
+speed = 65.0
+health = 2
+score_value = 25
+idle_tex = ExtResource("13")
+run_tex = ExtResource("14")
+
+[node name="Enemy8" parent="World" instance=ExtResource("3")]
+position = Vector2(1550, 210)
+patrol_distance = 110.0
+speed = 65.0
+idle_tex = ExtResource("15")
+run_tex = ExtResource("16")
+
+[node name="F1_wardrobe" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(90, 58)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F1_wardrobe"]
+position = Vector2(0, -19.5)
+texture = ExtResource("17")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F1_wardrobe"]
+position = Vector2(0, -6.0)
+shape = SubResource("Rect_28x12")
+
+[node name="F2_desk" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(200, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F2_desk"]
+position = Vector2(0, -12.5)
+texture = ExtResource("18")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F2_desk"]
+position = Vector2(0, -5.5)
+shape = SubResource("Rect_25x11")
+
+[node name="F3_desk" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(280, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F3_desk"]
+position = Vector2(0, -12.5)
+texture = ExtResource("18")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F3_desk"]
+position = Vector2(0, -5.5)
+shape = SubResource("Rect_25x11")
+
+[node name="F4_floorlamp_blue" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(240, 244)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F4_floorlamp_blue"]
+position = Vector2(0, -16.5)
+texture = ExtResource("19")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F4_floorlamp_blue"]
+position = Vector2(0, -6.0)
+shape = SubResource("Rect_13x12")
+
+[node name="F5_plant" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(36, 244)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F5_plant"]
+position = Vector2(0, -15.5)
+texture = ExtResource("20")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F5_plant"]
+position = Vector2(0, -6.0)
+shape = SubResource("Rect_16x12")
+
+[node name="F6_wardrobe" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(850, 58)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F6_wardrobe"]
+position = Vector2(0, -19.5)
+texture = ExtResource("17")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F6_wardrobe"]
+position = Vector2(0, -6.0)
+shape = SubResource("Rect_28x12")
+
+[node name="F7_desk" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(780, 190)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F7_desk"]
+position = Vector2(0, -12.5)
+texture = ExtResource("18")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F7_desk"]
+position = Vector2(0, -5.5)
+shape = SubResource("Rect_25x11")
+
+[node name="F8_desk" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(920, 190)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F8_desk"]
+position = Vector2(0, -12.5)
+texture = ExtResource("18")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F8_desk"]
+position = Vector2(0, -5.5)
+shape = SubResource("Rect_25x11")
+
+[node name="F9_globe" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(850, 244)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F9_globe"]
+position = Vector2(0, -10.5)
+texture = ExtResource("21")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F9_globe"]
+position = Vector2(0, -4.5)
+shape = SubResource("Rect_11x9")
+
+[node name="F10_plant2" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(1050, 60)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F10_plant2"]
+position = Vector2(0, -11.5)
+texture = ExtResource("22")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F10_plant2"]
+position = Vector2(0, -5.0)
+shape = SubResource("Rect_12x10")
+
+[node name="F11_wardrobe" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(1460, 58)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F11_wardrobe"]
+position = Vector2(0, -19.5)
+texture = ExtResource("17")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F11_wardrobe"]
+position = Vector2(0, -6.0)
+shape = SubResource("Rect_28x12")
+
+[node name="F12_desk" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(1370, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F12_desk"]
+position = Vector2(0, -12.5)
+texture = ExtResource("18")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F12_desk"]
+position = Vector2(0, -5.5)
+shape = SubResource("Rect_25x11")
+
+[node name="F13_desk" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(1550, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F13_desk"]
+position = Vector2(0, -12.5)
+texture = ExtResource("18")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F13_desk"]
+position = Vector2(0, -5.5)
+shape = SubResource("Rect_25x11")
+
+[node name="F14_floorlamp_cream" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(1664, 244)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F14_floorlamp_cream"]
+position = Vector2(0, -16.5)
+texture = ExtResource("23")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F14_floorlamp_cream"]
+position = Vector2(0, -6.0)
+shape = SubResource("Rect_11x12")
+
+[node name="F15_globe" type="StaticBody2D" parent="World"]
+collision_layer = 2
+position = Vector2(1276, 244)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/F15_globe"]
+position = Vector2(0, -10.5)
+texture = ExtResource("21")
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/F15_globe"]
+position = Vector2(0, -4.5)
+shape = SubResource("Rect_11x9")
