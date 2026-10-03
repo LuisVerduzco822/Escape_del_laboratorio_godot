@@ -7,20 +7,34 @@ signal score_changed(new_score: int)
 signal lives_changed(new_lives: int)
 signal level_changed(new_level: int)
 signal item_collected(remaining: int)
+signal ammo_changed(remaining: int, reloading: bool)
 signal game_over
 signal victory
 
 const MAX_LEVEL := 3
-const START_LIVES := 3
+const START_LIVES := 4
+const MAX_AMMO := 8
+const RELOAD_TIME := 1.5
 
 var score := 0
 var lives := START_LIVES
 var current_level := 1
 var items_remaining := 0
+var ammo := MAX_AMMO
+var reload_timer := 0.0
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	_setup_input_actions()
+
+
+func _process(delta: float) -> void:
+	if reload_timer <= 0.0:
+		return
+	reload_timer = maxf(reload_timer - delta, 0.0)
+	if reload_timer == 0.0:
+		_reset_ammo()
 
 
 ## Crea en tiempo de ejecución las acciones de input personalizadas
@@ -54,9 +68,26 @@ func start_new_game() -> void:
 	lives = START_LIVES
 	current_level = 1
 	items_remaining = 0
+	_reset_ammo()
 	score_changed.emit(score)
 	lives_changed.emit(lives)
 	level_changed.emit(current_level)
+
+
+func consume_shot() -> bool:
+	if ammo <= 0 or reload_timer > 0.0:
+		return false
+	ammo -= 1
+	if ammo == 0:
+		reload_timer = RELOAD_TIME
+	ammo_changed.emit(ammo, reload_timer > 0.0)
+	return true
+
+
+func _reset_ammo() -> void:
+	ammo = MAX_AMMO
+	reload_timer = 0.0
+	ammo_changed.emit(ammo, false)
 
 
 func add_score(amount: int) -> void:
@@ -79,13 +110,14 @@ func collect_item(value: int = 10) -> void:
 
 
 func player_hit(damage: int = 1) -> void:
-	lives -= damage
-	lives_changed.emit(lives)
-	AudioManager.play_sfx("hit")
 	if lives <= 0:
-		AudioManager.stop_music()
-		AudioManager.play_sfx("gameover")
+		return
+	lives = maxi(lives - damage, 0)
+	lives_changed.emit(lives)
+	if lives <= 0:
 		game_over.emit()
+	else:
+		AudioManager.play_sfx("hit")
 
 
 func level_complete() -> void:
@@ -95,4 +127,5 @@ func level_complete() -> void:
 		victory.emit()
 	else:
 		current_level += 1
+		_reset_ammo()
 		level_changed.emit(current_level)

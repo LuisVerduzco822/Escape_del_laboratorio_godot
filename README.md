@@ -18,7 +18,7 @@ Probado sin errores en la primera importación con **Godot 4.3 y 4.4.1** en modo
 | Pausa | Esc |
 
 ## Cómo se juega
-Recolecta **todas las estrellas** del nivel: la salida está **roja (CERRADA)** hasta que las tengas todas, y se pone **verde (SALIDA)** al completarlas. Los enemigos patrullan y quitan una vida al tocarte (3 vidas). Puedes dispararles; las balas se detienen contra los muebles/paredes. Al terminar el nivel 3 ganas.
+Recolecta **todas las estrellas** del nivel: la salida está **roja (CERRADA)** hasta que las tengas todas, y se pone **verde (SALIDA)** al completarlas. Los enemigos patrullan y quitan una vida al tocarte (4 vidas). Puedes dispararles; las balas se detienen contra los muebles/paredes. Al terminar el nivel 3 ganas.
 
 ## Niveles y dificultad
 | Nivel | Dificultad | Diseño | Estrellas | Enemigos |
@@ -39,10 +39,13 @@ La cámara sigue al jugador con suavizado en los niveles 2 y 3 (más anchos que 
 - **Fuente:** Press Start 2P (licencia OFL), aplicada a todo el juego por código en `Main.gd`.
 - **Portada:** marco tipo arcade (borde dorado + línea cian), scanlines estilo CRT, título con sombra y brillo pulsante, y los 4 personajes ilustrados a los lados.
 - **Pantalla de victoria/derrota:** mismo tratamiento (marco, scanlines, sombra de título).
-- **HUD:** vidas, puntos, nivel actual (n/3) y estrellas restantes.
+- **HUD:** barra de vidas con estados verde (4), azul (3), amarillo (2), rojo (1) y vacía (0), cifra exacta de vidas, puntos, nivel actual (n/3) y estrellas restantes. Al perder la última vida, el nivel se congela y la pantalla de derrota aparece cuando termina el sonido. La barra de disparos de `bdragon1727` muestra 8 cargas; al gastarlas, se recarga automáticamente en 1,5 segundos y no permite disparar durante la recarga.
+- **Botones:** menús principal y final con el estilo de `toffeecraft`.
 
 ## Audio
-Música de fondo en loop y 6 efectos (moneda, golpe, dash, disparo, victoria, game over), generados específicamente para este proyecto (síntesis por ondas, sin depender de archivos de terceros) y ya enlazados en `AudioManager.gd`. Para cambiarlos, reemplaza el `.wav` correspondiente dentro de `assets/audio/` manteniendo el mismo nombre de archivo.
+Música de fondo en loop y 6 efectos (moneda, golpe, dash, disparo, victoria, game over). Para cambiar una pista o su volumen desde Godot, abre `scenes/autoload/AudioManager.tscn` y selecciona el nodo `MusicPlayer` o el efecto correspondiente; edita `Stream` y `Volume Db` en el Inspector. Los efectos fueron generados para este proyecto; la música actual es un MP3 añadido posteriormente.
+
+La fuente y las escenas de los tres niveles se cambian en el Inspector de `scenes/Main.tscn` (nodo `Main`); la escena del proyectil se cambia en `scenes/player/Player.tscn` (nodo `Player`).
 
 ## Estructura
 ```
@@ -61,4 +64,9 @@ scripts/ autoload/ (GameManager, AudioManager), util/, player/, enemy/, item/, l
 ## Licencias
 - Pack Modern Interiors Free v2.2: uso no comercial (`assets/ASSETS_LICENSE.txt`).
 - Press Start 2P: SIL OFL 1.1 (`assets/fonts/OFL.txt`).
-- Audio: generado para este proyecto, sin restricciones.
+- Efectos de sonido: generados para este proyecto.
+
+## Créditos de recursos externos
+- **Música de fondo actual** (`music_background.mp3`, no la versión `alt`): [Retro Synthwave Music Pack — Swarajthegreat](https://swarajthegreat.itch.io/retro-synthwave-music-pack). Licencia CC0 según la página del autor.
+- **Botones de la interfaz:** [UI User Interface Pack - Simple — ToffeeCraft](https://toffeecraft.itch.io/ui-user-interface-pack-fresh-and-modern). Uso personal y comercial permitido; no redistribuir los recursos por separado.
+- **Barras de vidas y disparos:** [Basic Pixel Health bar and Scroll bar — BDragon1727](https://bdragon1727.itch.io/basic-pixel-health-bar-and-scroll-bar). Uso gratuito en juegos no comerciales; no revender ni redistribuir los recursos por separado.

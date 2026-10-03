@@ -1,9 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpbyfgf8tyfya"]
+[gd_scene load_steps=11 format=3 uid="uid://bpbyfgf8tyfya"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/MainMenu.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://cybqpaxvfiepw" path="res://assets/ui/scanlines.png" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/levels/Level1.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/levels/Level2.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/levels/Level3.tscn" id="7"]
+[ext_resource type="FontFile" uid="uid://do7l34kmr4t4l" path="res://assets/fonts/PressStart2P-Regular.ttf" id="8"]
+
+[sub_resource type="StyleBoxFlat" id="ButtonFocus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.82, 0.22, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_endframe"]
 bg_color = Color(0, 0, 0, 0)
@@ -15,6 +31,8 @@ border_color = Color(0.86, 0.71, 0.25, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1")
+level_scenes = Array[PackedScene]([ExtResource("5"), ExtResource("6"), ExtResource("7")])
+pixel_font = ExtResource("8")
 
 [node name="LevelHolder" type="Node2D" parent="."]
 
@@ -85,11 +103,13 @@ layout_mode = 2
 [node name="RetryButton" type="Button" parent="EndLayer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(180, 36)
 layout_mode = 2
+theme_override_styles/focus = SubResource("ButtonFocus")
 text = "REINTENTAR"
 
 [node name="MenuButton" type="Button" parent="EndLayer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(180, 36)
 layout_mode = 2
+theme_override_styles/focus = SubResource("ButtonFocus")
 text = "MENÚ PRINCIPAL"
 
 [node name="EndScanlines" type="TextureRect" parent="EndLayer"]

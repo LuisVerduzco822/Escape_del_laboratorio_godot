@@ -1,45 +1,87 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/HUD.gd" id="1"]
+[ext_resource type="SpriteFrames" path="res://scenes/ui/LivesSpriteFrames.tres" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/ammo_states.png" id="3"]
+
+[sub_resource type="AtlasTexture" id="AmmoFull"]
+atlas = ExtResource("3")
+region = Rect2(384, 0, 48, 16)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_left = 8.0
-offset_top = 6.0
-offset_right = 470.0
-offset_bottom = 30.0
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 4
+offset_top = 5.0
+offset_right = 472.0
+offset_bottom = 23.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
-[node name="LivesLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="Bars" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+theme_override_constants/separation = 7
+
+[node name="LivesRow" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Bars"]
+theme_override_constants/separation = 3
+
+[node name="LivesSprite" type="AnimatedSprite2D" parent="MarginContainer/HBoxContainer/Bars/LivesRow"]
+position = Vector2(24, 8)
+sprite_frames = ExtResource("2")
+animation = &"green"
+texture_filter = 1
+
+[node name="LivesSpacer" type="Control" parent="MarginContainer/HBoxContainer/Bars/LivesRow"]
+custom_minimum_size = Vector2(48, 16)
+
+[node name="LivesLabel" type="Label" parent="MarginContainer/HBoxContainer/Bars/LivesRow"]
 theme_override_font_sizes/font_size = 7
-theme_override_colors/font_color = Color(1, 0.55, 0.55, 1)
+theme_override_colors/font_color = Color(0.85, 1, 0.88, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
-text = "Vidas: 3"
+text = "4/4"
 
-[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="AmmoRow" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Bars"]
+theme_override_constants/separation = 3
+
+[node name="AmmoSprite" type="Sprite2D" parent="MarginContainer/HBoxContainer/Bars/AmmoRow"]
+position = Vector2(24, 8)
+texture = SubResource("AmmoFull")
+texture_filter = 1
+
+[node name="AmmoSpacer" type="Control" parent="MarginContainer/HBoxContainer/Bars/AmmoRow"]
+custom_minimum_size = Vector2(48, 16)
+
+[node name="AmmoLabel" type="Label" parent="MarginContainer/HBoxContainer/Bars/AmmoRow"]
+theme_override_font_sizes/font_size = 6
+theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "8/8"
+
+[node name="Stats" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+theme_override_constants/separation = 8
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer/Stats"]
 theme_override_font_sizes/font_size = 7
 theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "Puntos: 0"
 
-[node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer/Stats"]
 theme_override_font_sizes/font_size = 7
 theme_override_colors/font_color = Color(0.6, 0.85, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
-text = "Nivel: 1"
+text = "Nivel: 1/3"
 
-[node name="ItemsLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="ItemsLabel" type="Label" parent="MarginContainer/HBoxContainer/Stats"]
 theme_override_font_sizes/font_size = 7
 theme_override_colors/font_color = Color(0.75, 1, 0.75, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
-text = "Ítems restantes: 0"
+text = "Estrellas: 0"

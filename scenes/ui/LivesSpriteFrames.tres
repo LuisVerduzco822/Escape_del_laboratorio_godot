@@ -1,0 +1,66 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://ca026r8ouyqi2"]
+
+[ext_resource type="Texture2D" uid="uid://dru4h2q22uvrk" path="res://assets/ui/lives_states.png" id="1"]
+
+[sub_resource type="AtlasTexture" id="blue"]
+atlas = ExtResource("1")
+region = Rect2(48, 0, 48, 16)
+
+[sub_resource type="AtlasTexture" id="empty"]
+atlas = ExtResource("1")
+region = Rect2(192, 0, 48, 16)
+
+[sub_resource type="AtlasTexture" id="green"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 48, 16)
+
+[sub_resource type="AtlasTexture" id="red"]
+atlas = ExtResource("1")
+region = Rect2(144, 0, 48, 16)
+
+[sub_resource type="AtlasTexture" id="yellow"]
+atlas = ExtResource("1")
+region = Rect2(96, 0, 48, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("blue")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("empty")
+}],
+"loop": false,
+"name": &"empty",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("green")
+}],
+"loop": false,
+"name": &"green",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("red")
+}],
+"loop": false,
+"name": &"red",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("yellow")
+}],
+"loop": false,
+"name": &"yellow",
+"speed": 1.0
+}]

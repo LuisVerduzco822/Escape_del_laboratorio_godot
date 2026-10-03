@@ -4,11 +4,8 @@ extends Node2D
 ## (game over / victoria). Reacciona a las señales de GameManager;
 ## nunca decide la lógica de juego por sí misma.
 
-const LEVEL_SCENES := [
-	"res://scenes/levels/Level1.tscn",
-	"res://scenes/levels/Level2.tscn",
-	"res://scenes/levels/Level3.tscn",
-]
+@export var level_scenes: Array[PackedScene]
+@export var pixel_font: Font
 
 @onready var level_holder: Node2D = $LevelHolder
 @onready var menu_layer: CanvasLayer = $MenuLayer
@@ -22,6 +19,8 @@ const LEVEL_SCENES := [
 
 var current_level_node: Node = null
 var pause_label: Label = null
+var death_sequence_active := false
+var end_focus_token := 0
 
 
 func _ready() -> void:
@@ -53,10 +52,9 @@ func _ready() -> void:
 ## toda la interfaz. Se hace por código para que el proyecto abra sin
 ## errores la primera vez que Godot importa la fuente.
 func _apply_pixel_font() -> void:
-	var font_path := "res://assets/fonts/PressStart2P-Regular.ttf"
-	if ResourceLoader.exists(font_path):
+	if pixel_font:
 		var theme := ThemeDB.get_default_theme()
-		theme.default_font = load(font_path)
+		theme.default_font = pixel_font
 		theme.default_font_size = 8
 
 
@@ -78,12 +76,14 @@ func _build_pause_label() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel") and hud_layer.visible:
+	if not death_sequence_active and event.is_action_pressed("ui_cancel") and hud_layer.visible:
 		get_tree().paused = not get_tree().paused
 		pause_label.visible = get_tree().paused
 
 
 func _start_game() -> void:
+	end_focus_token += 1
+	death_sequence_active = false
 	get_tree().paused = false
 	pause_label.visible = false
 	GameManager.start_new_game()
@@ -102,12 +102,26 @@ func _on_level_changed(n: int) -> void:
 func _load_level(n: int) -> void:
 	if current_level_node:
 		current_level_node.queue_free()
-	var level_scene: PackedScene = load(LEVEL_SCENES[n - 1])
+	if n < 1 or n > level_scenes.size() or level_scenes[n - 1] == null:
+		push_error("Falta configurar la escena del nivel %d en Main.tscn" % n)
+		return
+	var level_scene: PackedScene = level_scenes[n - 1]
 	current_level_node = level_scene.instantiate()
 	level_holder.add_child(current_level_node)
 
 
 func _on_game_over() -> void:
+	if death_sequence_active:
+		return
+	death_sequence_active = true
+	pause_label.visible = false
+	get_tree().paused = true
+	AudioManager.stop_music()
+	AudioManager.play_sfx("gameover")
+	if AudioManager.sfx_gameover.stream:
+		await AudioManager.sfx_gameover.finished
+	else:
+		await get_tree().process_frame
 	_show_end_screen("GAME OVER")
 
 
@@ -116,11 +130,15 @@ func _on_victory() -> void:
 
 
 func _show_end_screen(title: String) -> void:
+	death_sequence_active = false
+	end_focus_token += 1
 	get_tree().paused = false
 	pause_label.visible = false
 	hud_layer.visible = false
+	retry_button.focus_mode = Control.FOCUS_NONE
+	menu_button.focus_mode = Control.FOCUS_NONE
 	end_layer.visible = true
-	retry_button.grab_focus.call_deferred()
+	_enable_end_buttons_when_input_released(end_focus_token)
 	end_title.text = title
 	end_title_shadow.text = title
 	end_score.text = "Puntuación final: %d" % GameManager.score
@@ -129,11 +147,25 @@ func _show_end_screen(title: String) -> void:
 		current_level_node = null
 
 
+func _enable_end_buttons_when_input_released(token: int) -> void:
+	# Espacio también activa ui_accept. No enfocar botones hasta que se
+	# suelte la tecla usada durante el juego y pase un fotograma limpio.
+	while Input.is_action_pressed("ui_accept"):
+		await get_tree().process_frame
+	await get_tree().process_frame
+	if token != end_focus_token or not end_layer.visible:
+		return
+	retry_button.focus_mode = Control.FOCUS_ALL
+	menu_button.focus_mode = Control.FOCUS_ALL
+	retry_button.grab_focus()
+
+
 func _on_retry_button_pressed() -> void:
 	_start_game()
 
 
 func _on_menu_button_pressed() -> void:
+	end_focus_token += 1
 	end_layer.visible = false
 	menu_layer.visible = true
 	menu_layer.select_play_button.call_deferred()

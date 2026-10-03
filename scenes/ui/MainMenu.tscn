@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/tiles/floor_l1.png" id="2"]
@@ -8,6 +8,35 @@
 [ext_resource type="Texture2D" path="res://assets/characters/Alex_idle_anim_16x16.png" id="6"]
 [ext_resource type="Texture2D" path="res://assets/characters/Amelia_idle_anim_16x16.png" id="7"]
 [ext_resource type="Texture2D" path="res://assets/ui/scanlines.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/ui/modern_button_blank.png" id="9"]
+
+[sub_resource type="StyleBoxTexture" id="ModernButton"]
+texture = ExtResource("9")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(0, 0, 96, 32)
+
+[sub_resource type="StyleBoxTexture" id="ModernButtonPressed"]
+texture = ExtResource("9")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(96, 0, 96, 32)
+
+[sub_resource type="StyleBoxFlat" id="ButtonFocus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.82, 0.22, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_adam"]
 atlas = ExtResource("3")
@@ -93,7 +122,7 @@ offset_right = 480.0
 offset_bottom = 270.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-theme_override_constants/separation = 12
+theme_override_constants/separation = 7
 alignment = 1
 
 [node name="TitleStack" type="Control" parent="CenterContainer/VBoxContainer"]
@@ -126,9 +155,10 @@ LABORATORIO"
 alignment = 1
 theme_override_constants/separation = 10
 
-[node name="StarLeft" type="Sprite2D" parent="CenterContainer/VBoxContainer/StarRow"]
-scale = Vector2(2, 2)
+[node name="StarLeft" type="TextureRect" parent="CenterContainer/VBoxContainer/StarRow"]
+custom_minimum_size = Vector2(16, 16)
 texture = ExtResource("5")
+expand_mode = 1
 texture_filter = 1
 
 [node name="SubtitleLabel" type="Label" parent="CenterContainer/VBoxContainer/StarRow"]
@@ -137,31 +167,51 @@ theme_override_colors/font_color = Color(0.85, 0.87, 0.92, 1)
 horizontal_alignment = 1
 text = "Aventura top-down 2D"
 
-[node name="StarRight" type="Sprite2D" parent="CenterContainer/VBoxContainer/StarRow"]
-scale = Vector2(2, 2)
+[node name="StarRight" type="TextureRect" parent="CenterContainer/VBoxContainer/StarRow"]
+custom_minimum_size = Vector2(16, 16)
 texture = ExtResource("5")
+expand_mode = 1
 texture_filter = 1
 
 [node name="Spacer" type="Control" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 8)
+custom_minimum_size = Vector2(0, 2)
 
 [node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 38)
+custom_minimum_size = Vector2(172, 28)
 theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.96, 0.94, 0.85, 1)
+theme_override_styles/normal = SubResource("ModernButton")
+theme_override_styles/hover = SubResource("ModernButtonPressed")
+theme_override_styles/pressed = SubResource("ModernButtonPressed")
+theme_override_styles/focus = SubResource("ButtonFocus")
 text = "JUGAR"
 
 [node name="CreditsButton" type="Button" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 38)
+custom_minimum_size = Vector2(172, 28)
 theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.96, 0.94, 0.85, 1)
+theme_override_styles/normal = SubResource("ModernButton")
+theme_override_styles/hover = SubResource("ModernButtonPressed")
+theme_override_styles/pressed = SubResource("ModernButtonPressed")
+theme_override_styles/focus = SubResource("ButtonFocus")
 text = "CREDITOS"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 38)
+custom_minimum_size = Vector2(172, 28)
 theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.96, 0.94, 0.85, 1)
+theme_override_styles/normal = SubResource("ModernButton")
+theme_override_styles/hover = SubResource("ModernButtonPressed")
+theme_override_styles/pressed = SubResource("ModernButtonPressed")
+theme_override_styles/focus = SubResource("ButtonFocus")
 text = "SALIR"
 
-[node name="ControlsLabel" type="Label" parent="CenterContainer/VBoxContainer"]
-theme_override_font_sizes/font_size = 6
+[node name="ControlsLabel" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 18.0
+offset_right = 464.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 5
 theme_override_colors/font_color = Color(0.62, 0.65, 0.72, 1)
 horizontal_alignment = 1
 text = "Flechas: moverte | Espacio: dash | Clic/J: disparar | Esc: pausa"

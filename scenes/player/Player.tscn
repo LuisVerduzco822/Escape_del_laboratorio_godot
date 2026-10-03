@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://be0723w6qm27w"]
+[gd_scene load_steps=5 format=3 uid="uid://be0723w6qm27w"]
 
 [ext_resource type="Script" path="res://scripts/player/Player.gd" id="1"]
 [ext_resource type="SpriteFrames" uid="uid://cqk2hqsq7bh40" path="res://scenes/player/PlayerSpriteFrames.tres" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/player/Bullet.tscn" id="3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
 size = Vector2(12, 14)
@@ -9,6 +10,7 @@ size = Vector2(12, 14)
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1")
+bullet_scene = ExtResource("3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

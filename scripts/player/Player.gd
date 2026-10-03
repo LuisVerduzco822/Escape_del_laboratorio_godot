@@ -10,7 +10,7 @@ const DASH_TIME := 0.18
 const DASH_COOLDOWN := 0.6
 const INVULN_TIME := 1.0
 
-const BULLET_SCENE := preload("res://scenes/player/Bullet.tscn")
+@export var bullet_scene: PackedScene
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -91,7 +91,12 @@ func _vector_from_dir(d: String) -> Vector2:
 
 
 func _shoot() -> void:
-	var bullet := BULLET_SCENE.instantiate()
+	if bullet_scene == null:
+		push_error("Falta configurar Bullet Scene en Player.tscn")
+		return
+	if not GameManager.consume_shot():
+		return
+	var bullet := bullet_scene.instantiate()
 	get_parent().add_child(bullet)
 	bullet.global_position = global_position
 	bullet.direction = _vector_from_dir(facing)

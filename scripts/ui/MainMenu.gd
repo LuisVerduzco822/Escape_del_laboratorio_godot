@@ -21,9 +21,6 @@ func _ready() -> void:
 		button.focus_neighbor_bottom = button.get_path_to(buttons[(i + 1) % buttons.size()])
 		button.focus_neighbor_left = button.focus_neighbor_top
 		button.focus_neighbor_right = button.focus_neighbor_bottom
-	for b in [play_button, credits_button, quit_button]:
-		b.mouse_entered.connect(_on_button_hover.bind(b))
-		b.mouse_exited.connect(_on_button_unhover.bind(b))
 	_pulse_title()
 	select_play_button.call_deferred()
 
@@ -37,16 +34,6 @@ func _pulse_title() -> void:
 	t.set_loops()
 	t.tween_property(title_label, "modulate", Color(1, 1, 0.55), 0.8).set_trans(Tween.TRANS_SINE)
 	t.tween_property(title_label, "modulate", Color(0.42, 0.92, 1), 0.8).set_trans(Tween.TRANS_SINE)
-
-
-func _on_button_hover(b: Button) -> void:
-	var t := create_tween()
-	t.tween_property(b, "modulate", Color(1.0, 0.85, 0.25), 0.15)
-
-
-func _on_button_unhover(b: Button) -> void:
-	var t := create_tween()
-	t.tween_property(b, "modulate", Color(1, 1, 1), 0.15)
 
 
 func _on_play_button_pressed() -> void:
