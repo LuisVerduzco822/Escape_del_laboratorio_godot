@@ -31,7 +31,10 @@ func _ready() -> void:
 	# errores la primera vez, cuando Godot aún está importando los .wav.
 	music_player.stream = _load_audio("music_background.wav")
 	if music_player.stream is AudioStreamWAV:
-		(music_player.stream as AudioStreamWAV).loop_mode = AudioStreamWAV.LOOP_FORWARD
+		var music_stream := music_player.stream as AudioStreamWAV
+		music_stream.loop_begin = 0
+		music_stream.loop_end = int(music_stream.get_length() * music_stream.mix_rate)
+		music_stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
 	music_player.volume_db = -10.0
 
 	sfx_coin.stream = _load_audio("sfx_coin.wav")

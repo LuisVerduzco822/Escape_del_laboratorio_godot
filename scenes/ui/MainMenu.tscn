@@ -98,12 +98,15 @@ alignment = 1
 
 [node name="TitleStack" type="Control" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 40)
+size_flags_horizontal = 3
 
 [node name="TitleShadow" type="Label" parent="CenterContainer/VBoxContainer/TitleStack"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 3.0
-offset_right = 302.0
-offset_bottom = 43.0
+offset_right = 2.0
+offset_bottom = 3.0
 theme_override_font_sizes/font_size = 15
 theme_override_colors/font_color = Color(0.05, 0.05, 0.08, 1)
 horizontal_alignment = 1
@@ -111,8 +114,8 @@ text = "ESCAPE DEL
 LABORATORIO"
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/TitleStack"]
-offset_right = 300.0
-offset_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme_override_font_sizes/font_size = 15
 theme_override_colors/font_color = Color(0.42, 0.92, 1, 1)
 horizontal_alignment = 1

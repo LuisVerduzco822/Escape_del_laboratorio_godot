@@ -1,7 +1,7 @@
 extends Area2D
 ## Enemigo que patrulla en línea recta (horizontal o vertical) y quita
 ## una vida al tocar al jugador. Usa personajes reales del pack de
-## assets; cada instancia puede cambiar idle_tex/run_tex, la vida
+## assets; cada instancia puede cambiar su recurso SpriteFrames, la vida
 ## (health), la velocidad y el eje de patrulla desde el inspector.
 
 @export var patrol_distance := 60.0
@@ -9,13 +9,6 @@ extends Area2D
 @export var health := 1
 @export var score_value := 15
 @export var vertical := false
-@export var idle_tex: Texture2D
-@export var run_tex: Texture2D
-
-const SpriteBuilder := preload("res://scripts/util/SpriteBuilder.gd")
-const DEFAULT_IDLE := preload("res://assets/characters/Bob_idle_anim_16x16.png")
-const DEFAULT_RUN := preload("res://assets/characters/Bob_run_16x16.png")
-
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var _start := 0.0
@@ -26,9 +19,6 @@ func _ready() -> void:
 	add_to_group("enemy")
 	_start = position.y if vertical else position.x
 
-	var idle: Texture2D = idle_tex if idle_tex else DEFAULT_IDLE
-	var run: Texture2D = run_tex if run_tex else DEFAULT_RUN
-	sprite.sprite_frames = SpriteBuilder.build_four_dir_frames(idle, run)
 	sprite.play("run_down" if vertical else "run_right")
 
 

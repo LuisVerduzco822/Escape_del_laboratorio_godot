@@ -14,10 +14,22 @@ signal quit_pressed
 
 func _ready() -> void:
 	credits_label.visible = false
+	var buttons := [play_button, credits_button, quit_button]
+	for i in buttons.size():
+		var button: Button = buttons[i]
+		button.focus_neighbor_top = button.get_path_to(buttons[(i - 1 + buttons.size()) % buttons.size()])
+		button.focus_neighbor_bottom = button.get_path_to(buttons[(i + 1) % buttons.size()])
+		button.focus_neighbor_left = button.focus_neighbor_top
+		button.focus_neighbor_right = button.focus_neighbor_bottom
 	for b in [play_button, credits_button, quit_button]:
 		b.mouse_entered.connect(_on_button_hover.bind(b))
 		b.mouse_exited.connect(_on_button_unhover.bind(b))
 	_pulse_title()
+	select_play_button.call_deferred()
+
+
+func select_play_button() -> void:
+	play_button.grab_focus()
 
 
 func _pulse_title() -> void:

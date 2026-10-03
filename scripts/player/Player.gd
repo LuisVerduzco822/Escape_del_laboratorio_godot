@@ -10,10 +10,7 @@ const DASH_TIME := 0.18
 const DASH_COOLDOWN := 0.6
 const INVULN_TIME := 1.0
 
-const IDLE_TEX := preload("res://assets/characters/Adam_idle_anim_16x16.png")
-const RUN_TEX := preload("res://assets/characters/Adam_run_16x16.png")
 const BULLET_SCENE := preload("res://scenes/player/Bullet.tscn")
-const SpriteBuilder := preload("res://scripts/util/SpriteBuilder.gd")
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -27,7 +24,6 @@ var invuln_timer := 0.0
 
 func _ready() -> void:
 	add_to_group("player")
-	sprite.sprite_frames = SpriteBuilder.build_four_dir_frames(IDLE_TEX, RUN_TEX)
 	sprite.play("idle_down")
 
 

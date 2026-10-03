@@ -17,6 +17,8 @@ const LEVEL_SCENES := [
 @onready var end_title: Label = $EndLayer/CenterContainer/VBoxContainer/TitleStack/TitleLabel
 @onready var end_title_shadow: Label = $EndLayer/CenterContainer/VBoxContainer/TitleStack/TitleShadow
 @onready var end_score: Label = $EndLayer/CenterContainer/VBoxContainer/ScoreSummaryLabel
+@onready var retry_button: Button = $EndLayer/CenterContainer/VBoxContainer/RetryButton
+@onready var menu_button: Button = $EndLayer/CenterContainer/VBoxContainer/MenuButton
 
 var current_level_node: Node = null
 var pause_label: Label = null
@@ -29,6 +31,12 @@ func _ready() -> void:
 	GameManager.victory.connect(_on_victory)
 	menu_layer.play_pressed.connect(_start_game)
 	menu_layer.quit_pressed.connect(func(): get_tree().quit())
+	for button in [retry_button, menu_button]:
+		var other: Button = menu_button if button == retry_button else retry_button
+		button.focus_neighbor_top = button.get_path_to(other)
+		button.focus_neighbor_bottom = button.get_path_to(other)
+		button.focus_neighbor_left = button.get_path_to(other)
+		button.focus_neighbor_right = button.get_path_to(other)
 
 	menu_layer.visible = true
 	hud_layer.visible = false
@@ -112,6 +120,7 @@ func _show_end_screen(title: String) -> void:
 	pause_label.visible = false
 	hud_layer.visible = false
 	end_layer.visible = true
+	retry_button.grab_focus.call_deferred()
 	end_title.text = title
 	end_title_shadow.text = title
 	end_score.text = "Puntuación final: %d" % GameManager.score
@@ -127,3 +136,4 @@ func _on_retry_button_pressed() -> void:
 func _on_menu_button_pressed() -> void:
 	end_layer.visible = false
 	menu_layer.visible = true
+	menu_layer.select_play_button.call_deferred()

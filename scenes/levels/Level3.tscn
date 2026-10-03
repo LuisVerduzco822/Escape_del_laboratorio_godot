@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3]
+[gd_scene load_steps=34 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/LevelBase.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="2"]
@@ -12,10 +12,6 @@
 [ext_resource type="Texture2D" path="res://assets/decor/rug_green.png" id="10"]
 [ext_resource type="Texture2D" path="res://assets/decor/arrow.png" id="11"]
 [ext_resource type="Texture2D" path="res://assets/decor/chair.png" id="12"]
-[ext_resource type="Texture2D" path="res://assets/characters/Amelia_idle_anim_16x16.png" id="13"]
-[ext_resource type="Texture2D" path="res://assets/characters/Amelia_run_16x16.png" id="14"]
-[ext_resource type="Texture2D" path="res://assets/characters/Alex_idle_anim_16x16.png" id="15"]
-[ext_resource type="Texture2D" path="res://assets/characters/Alex_run_16x16.png" id="16"]
 [ext_resource type="Texture2D" path="res://assets/decor/wardrobe.png" id="17"]
 [ext_resource type="Texture2D" path="res://assets/decor/desk.png" id="18"]
 [ext_resource type="Texture2D" path="res://assets/decor/floorlamp_blue.png" id="19"]
@@ -23,6 +19,10 @@
 [ext_resource type="Texture2D" path="res://assets/decor/globe.png" id="21"]
 [ext_resource type="Texture2D" path="res://assets/decor/plant2.png" id="22"]
 [ext_resource type="Texture2D" path="res://assets/decor/floorlamp_cream.png" id="23"]
+
+[ext_resource type="SpriteFrames" path="res://scenes/enemy/AmeliaSpriteFrames.tres" id="20"]
+
+[ext_resource type="SpriteFrames" path="res://scenes/enemy/AlexSpriteFrames.tres" id="21"]
 
 [sub_resource type="RectangleShape2D" id="Rect_160x84"]
 size = Vector2(160, 84.0)
@@ -506,30 +506,38 @@ patrol_distance = 60.0
 speed = 60.0
 health = 2
 score_value = 25
-idle_tex = ExtResource("13")
-run_tex = ExtResource("14")
+
+
+[node name="AnimatedSprite2D" parent="World/Enemy1" index="2"]
+sprite_frames = ExtResource("20")
 
 [node name="Enemy2" parent="World" instance=ExtResource("3")]
 position = Vector2(330, 90)
 patrol_distance = 60.0
 speed = 60.0
-idle_tex = ExtResource("15")
-run_tex = ExtResource("16")
+
+
+[node name="AnimatedSprite2D" parent="World/Enemy2" index="2"]
+sprite_frames = ExtResource("21")
 
 [node name="Enemy3" parent="World" instance=ExtResource("3")]
 position = Vector2(540, 135)
 patrol_distance = 60.0
 speed = 60.0
 vertical = true
-idle_tex = ExtResource("13")
-run_tex = ExtResource("14")
+
+
+[node name="AnimatedSprite2D" parent="World/Enemy3" index="2"]
+sprite_frames = ExtResource("20")
 
 [node name="Enemy4" parent="World" instance=ExtResource("3")]
 position = Vector2(740, 90)
 patrol_distance = 100.0
 speed = 55.0
-idle_tex = ExtResource("15")
-run_tex = ExtResource("16")
+
+
+[node name="AnimatedSprite2D" parent="World/Enemy4" index="2"]
+sprite_frames = ExtResource("21")
 
 [node name="Enemy5" parent="World" instance=ExtResource("3")]
 position = Vector2(920, 210)
@@ -537,16 +545,20 @@ patrol_distance = 100.0
 speed = 55.0
 health = 2
 score_value = 25
-idle_tex = ExtResource("13")
-run_tex = ExtResource("14")
+
+
+[node name="AnimatedSprite2D" parent="World/Enemy5" index="2"]
+sprite_frames = ExtResource("20")
 
 [node name="Enemy6" parent="World" instance=ExtResource("3")]
 position = Vector2(1160, 135)
 patrol_distance = 60.0
 speed = 65.0
 vertical = true
-idle_tex = ExtResource("15")
-run_tex = ExtResource("16")
+
+
+[node name="AnimatedSprite2D" parent="World/Enemy6" index="2"]
+sprite_frames = ExtResource("21")
 
 [node name="Enemy7" parent="World" instance=ExtResource("3")]
 position = Vector2(1350, 90)
@@ -554,15 +566,19 @@ patrol_distance = 110.0
 speed = 65.0
 health = 2
 score_value = 25
-idle_tex = ExtResource("13")
-run_tex = ExtResource("14")
+
+
+[node name="AnimatedSprite2D" parent="World/Enemy7" index="2"]
+sprite_frames = ExtResource("20")
 
 [node name="Enemy8" parent="World" instance=ExtResource("3")]
 position = Vector2(1550, 210)
 patrol_distance = 110.0
 speed = 65.0
-idle_tex = ExtResource("15")
-run_tex = ExtResource("16")
+
+
+[node name="AnimatedSprite2D" parent="World/Enemy8" index="2"]
+sprite_frames = ExtResource("21")
 
 [node name="F1_wardrobe" type="StaticBody2D" parent="World"]
 collision_layer = 2
