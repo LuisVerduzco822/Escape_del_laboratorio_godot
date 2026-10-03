@@ -1,7 +1,9 @@
 extends CharacterBody2D
 ## Jugador estilo plataformas (Mario-like): movimiento horizontal,
 ## gravedad y salto. Si pisa una bola de fuego desde arriba la
-## elimina y rebota; si la toca de lado, pierde.
+## elimina y rebota; si la toca de lado, pierde una vida.
+
+const INVULN_TIME := 1.0
 
 @export var speed := 140.0
 @export var gravity := 1200.0
@@ -13,6 +15,7 @@ extends CharacterBody2D
 
 var facing := "right"
 var dead := false
+var invuln_timer := 0.0
 
 
 func _ready() -> void:
@@ -23,6 +26,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if dead:
 		return
+	if invuln_timer > 0.0:
+		invuln_timer = maxf(invuln_timer - delta, 0.0)
+		# Parpadeo visual durante la protección tras recibir daño.
+		sprite.visible = invuln_timer == 0.0 or int(invuln_timer * 12.0) % 2 == 0
 
 	var current_gravity := gravity * (fall_gravity_multiplier if velocity.y > 0.0 else 1.0)
 	velocity.y += current_gravity * delta
@@ -59,10 +66,14 @@ func bounce() -> void:
 	velocity.y = bounce_velocity
 
 
-## Llamado por el enemigo cuando el jugador lo toca de lado.
-func die() -> void:
-	if dead:
+## Llamado por la bola de fuego al tocar al jugador de lado.
+func take_damage() -> void:
+	if dead or invuln_timer > 0.0:
 		return
-	dead = true
-	velocity = Vector2.ZERO
-	GameManager.player_died()
+	GameManager.player_hit()
+	if GameManager.lives == 0:
+		dead = true
+		velocity = Vector2.ZERO
+		sprite.visible = true
+	else:
+		invuln_timer = INVULN_TIME

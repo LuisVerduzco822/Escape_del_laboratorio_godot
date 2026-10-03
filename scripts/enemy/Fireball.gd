@@ -2,7 +2,7 @@ extends Area2D
 ## Bola de fuego: aparece en el borde derecho de la pantalla y avanza
 ## en línea recta hacia la izquierda sobre la pasarela metálica. Si el
 ## jugador la pisa desde arriba (cayendo), se destruye y el jugador
-## rebota; si la toca de lado, el jugador pierde.
+## rebota; si la toca de lado, el jugador pierde una vida.
 
 @export var speed := 120.0
 
@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node) -> void:
 	if _dead or not body.is_in_group("player"):
 		return
-	if body.has_method("die") == false:
+	if body.has_method("take_damage") == false:
 		return
 
 	var falling: bool = "velocity" in body and body.velocity.y > 0.0
@@ -37,7 +37,7 @@ func _on_body_entered(body: Node) -> void:
 	if falling and is_above:
 		_die_stomped(body)
 	else:
-		body.die()
+		body.take_damage()
 
 
 func _die_stomped(player: Node) -> void:

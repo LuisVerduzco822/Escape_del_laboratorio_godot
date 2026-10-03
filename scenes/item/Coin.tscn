@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/item/Coin.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/decor/star_item.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/tiles/toolbox.png" id="2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_coin"]
 radius = 7.0
@@ -16,7 +16,7 @@ shape = SubResource("CircleShape2D_coin")
 
 [node name="Icon" type="Node2D" parent="."]
 
-[node name="Star" type="Sprite2D" parent="Icon"]
-scale = Vector2(2, 2)
+[node name="Toolbox" type="Sprite2D" parent="Icon"]
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("2")
 texture_filter = 1

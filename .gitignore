@@ -19,3 +19,4 @@ mono_crash.*.json
 # IDEs
 .vscode
 .env
+.godot_user_localappdata

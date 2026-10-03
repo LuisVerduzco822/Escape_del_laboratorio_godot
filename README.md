@@ -50,8 +50,7 @@ que todo se vea bien.
 - El jugador sigue usando el sprite "Adam" (del pack Modern
   Interiors que ya tenías en el proyecto) con sus animaciones de
   caminar/quieto; no se pidió cambiarlo.
-- La moneda reutiliza el ícono de estrella dorada que ya estaba en
-  el proyecto (`assets/decor/star_item.png`).
+- Las monedas recolectables usan `assets/tiles/toolbox.png`.
 
 ## Lógica de pisotón vs. golpe lateral
 `Fireball.gd` decide el resultado al tocar al jugador comparando su
@@ -69,7 +68,7 @@ assets/
   enemies/      Fireball.png
   fonts/        PressStart2P-Regular.ttf
   characters/   Adam (jugador)
-  decor/        star_item.png (moneda)
+  tiles/        toolbox.png (moneda recolectable)
   audio/        música + efectos (ya generados, conectados)
 scenes/
   Main.tscn, ui/MainMenu.tscn, ui/HUD.tscn
@@ -120,10 +119,15 @@ una meta), es un cambio pequeño en `LevelBase.gd`.
 - Capturas de pantalla reales (motor Godot vía Xvfb + Mesa) de
   portada, los 3 niveles, una bola de fuego en pantalla y Game Over.
 
-## Licencias
+## Créditos y licencias
 - Fondos, sprite de enemigo y fuente: los que subiste (Press Start 2P
   bajo SIL OFL 1.1, incluida en `assets/fonts/OFL.txt` si la trae el
   zip original).
-- Pack "Modern Interiors Free v2.2" (solo el personaje Adam, usado
-  como jugador): uso no comercial.
-- Audio: generado para este proyecto, sin restricciones.
+- **Assets de laboratorio:** [590+ Pixel Cargo, Tech & Laboratory Loot](https://rehandev.itch.io/590-pixel-cargo-tech-laboratory-loot),
+  por RehanDev.
+- **Personaje Adam:** [Modern Interiors](https://limezu.itch.io/moderninteriors),
+  por LimeZu. Se usa la versión gratuita, cuya licencia incluida en
+  `assets/ASSETS_LICENSE.txt` permite el uso no comercial.
+- **Música:** [Retro Synthwave Music Pack](https://swarajthegreat.itch.io/retro-synthwave-music-pack),
+  por swarajthegreat (CC0, según la página del autor).
+- **Efectos de sonido:** generados para este proyecto.
