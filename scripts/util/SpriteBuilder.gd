@@ -1,8 +1,8 @@
 class_name SpriteBuilder
 extends RefCounted
 ## Utilidad compartida por Player.gd y Enemy.gd: recorta una hoja de
-## sprites de 24 frames (16x32 cada uno: 6 derecha, 6 arriba, 6
-## izquierda, 6 abajo) y arma animaciones idle_* / run_* listas
+## sprites de 24 frames (16x32 cada uno: 6 abajo, 6 arriba, 6
+## izquierda, 6 derecha) y arma animaciones idle_* / run_* listas
 ## para usar en un AnimatedSprite2D.
 
 static func build_four_dir_frames(idle_tex: Texture2D, run_tex: Texture2D,
@@ -11,7 +11,7 @@ static func build_four_dir_frames(idle_tex: Texture2D, run_tex: Texture2D,
 	var frames := SpriteFrames.new()
 	if frames.has_animation("default"):
 		frames.remove_animation("default")
-	var directions := ["right", "up", "left", "down"]
+	var directions := ["down", "up", "left", "right"]
 	_add(frames, "idle", idle_tex, directions, frames_per_dir, idle_fps, frame_w, frame_h)
 	_add(frames, "run", run_tex, directions, frames_per_dir, run_fps, frame_w, frame_h)
 	return frames

@@ -1,58 +1,8 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/tiles/floor_l1.png" id="2"]
-[ext_resource type="Texture2D" path="res://assets/characters/Adam_idle_anim_16x16.png" id="3"]
-[ext_resource type="Texture2D" path="res://assets/characters/Bob_idle_anim_16x16.png" id="4"]
-[ext_resource type="Texture2D" path="res://assets/decor/star_item.png" id="5"]
-[ext_resource type="Texture2D" path="res://assets/characters/Alex_idle_anim_16x16.png" id="6"]
-[ext_resource type="Texture2D" path="res://assets/characters/Amelia_idle_anim_16x16.png" id="7"]
-[ext_resource type="Texture2D" path="res://assets/ui/scanlines.png" id="8"]
-[ext_resource type="Texture2D" path="res://assets/ui/modern_button_blank.png" id="9"]
-
-[sub_resource type="StyleBoxTexture" id="ModernButton"]
-texture = ExtResource("9")
-texture_margin_left = 7.0
-texture_margin_top = 7.0
-texture_margin_right = 7.0
-texture_margin_bottom = 7.0
-region_rect = Rect2(0, 0, 96, 32)
-
-[sub_resource type="StyleBoxTexture" id="ModernButtonPressed"]
-texture = ExtResource("9")
-texture_margin_left = 7.0
-texture_margin_top = 7.0
-texture_margin_right = 7.0
-texture_margin_bottom = 7.0
-region_rect = Rect2(96, 0, 96, 32)
-
-[sub_resource type="StyleBoxFlat" id="ButtonFocus"]
-bg_color = Color(0, 0, 0, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.82, 0.22, 1)
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_adam"]
-atlas = ExtResource("3")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bob"]
-atlas = ExtResource("4")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_alex"]
-atlas = ExtResource("6")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_amelia"]
-atlas = ExtResource("7")
-region = Rect2(0, 0, 16, 32)
+[ext_resource type="Texture2D" path="res://assets/backgrounds/level3_bg.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/scanlines.png" id="3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frame"]
 bg_color = Color(0, 0, 0, 0)
@@ -61,178 +11,65 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.86, 0.71, 0.25, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frame_inner"]
-bg_color = Color(0, 0, 0, 0)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.36, 0.85, 0.94, 0.9)
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1")
 
-[node name="BackgroundPattern" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 offset_right = 480.0
 offset_bottom = 270.0
 texture = ExtResource("2")
 expand_mode = 1
-stretch_mode = 1
+stretch_mode = 0
 texture_filter = 1
-modulate = Color(0.4, 0.32, 0.28, 1)
 
 [node name="Overlay" type="ColorRect" parent="."]
 offset_right = 480.0
 offset_bottom = 270.0
-color = Color(0.03, 0.04, 0.07, 0.72)
-
-[node name="AdamIllustration" type="Sprite2D" parent="."]
-position = Vector2(52, 225)
-scale = Vector2(4.2, 4.2)
-texture = SubResource("AtlasTexture_adam")
-texture_filter = 1
-
-[node name="AlexIllustration" type="Sprite2D" parent="."]
-position = Vector2(110, 232)
-scale = Vector2(3, 3)
-texture = SubResource("AtlasTexture_alex")
-texture_filter = 1
-
-[node name="AmeliaIllustration" type="Sprite2D" parent="."]
-position = Vector2(370, 232)
-scale = Vector2(3, 3)
-flip_h = true
-texture = SubResource("AtlasTexture_amelia")
-texture_filter = 1
-
-[node name="BobIllustration" type="Sprite2D" parent="."]
-position = Vector2(428, 225)
-scale = Vector2(4.2, 4.2)
-flip_h = true
-texture = SubResource("AtlasTexture_bob")
-texture_filter = 1
+color = Color(0.03, 0.04, 0.07, 0.6)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 offset_right = 480.0
 offset_bottom = 270.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-theme_override_constants/separation = 7
+theme_override_constants/separation = 24
 alignment = 1
 
 [node name="TitleStack" type="Control" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 40)
-size_flags_horizontal = 3
+custom_minimum_size = Vector2(320, 40)
 
 [node name="TitleShadow" type="Label" parent="CenterContainer/VBoxContainer/TitleStack"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 3.0
-offset_right = 2.0
-offset_bottom = 3.0
-theme_override_font_sizes/font_size = 15
+offset_right = 322.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.05, 0.05, 0.08, 1)
 horizontal_alignment = 1
-text = "ESCAPE DEL
+text = "ESCAPA DEL
 LABORATORIO"
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/TitleStack"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme_override_font_sizes/font_size = 15
+offset_right = 320.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42, 0.92, 1, 1)
 horizontal_alignment = 1
-text = "ESCAPE DEL
+text = "ESCAPA DEL
 LABORATORIO"
 
-[node name="StarRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-alignment = 1
-theme_override_constants/separation = 10
-
-[node name="StarLeft" type="TextureRect" parent="CenterContainer/VBoxContainer/StarRow"]
-custom_minimum_size = Vector2(16, 16)
-texture = ExtResource("5")
-expand_mode = 1
-texture_filter = 1
-
-[node name="SubtitleLabel" type="Label" parent="CenterContainer/VBoxContainer/StarRow"]
-theme_override_font_sizes/font_size = 7
-theme_override_colors/font_color = Color(0.85, 0.87, 0.92, 1)
-horizontal_alignment = 1
-text = "Aventura top-down 2D"
-
-[node name="StarRight" type="TextureRect" parent="CenterContainer/VBoxContainer/StarRow"]
-custom_minimum_size = Vector2(16, 16)
-texture = ExtResource("5")
-expand_mode = 1
-texture_filter = 1
-
-[node name="Spacer" type="Control" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 2)
-
 [node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(172, 28)
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(180, 36)
 theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.96, 0.94, 0.85, 1)
-theme_override_styles/normal = SubResource("ModernButton")
-theme_override_styles/hover = SubResource("ModernButtonPressed")
-theme_override_styles/pressed = SubResource("ModernButtonPressed")
-theme_override_styles/focus = SubResource("ButtonFocus")
-text = "JUGAR"
-
-[node name="CreditsButton" type="Button" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(172, 28)
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.96, 0.94, 0.85, 1)
-theme_override_styles/normal = SubResource("ModernButton")
-theme_override_styles/hover = SubResource("ModernButtonPressed")
-theme_override_styles/pressed = SubResource("ModernButtonPressed")
-theme_override_styles/focus = SubResource("ButtonFocus")
-text = "CREDITOS"
-
-[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(172, 28)
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.96, 0.94, 0.85, 1)
-theme_override_styles/normal = SubResource("ModernButton")
-theme_override_styles/hover = SubResource("ModernButtonPressed")
-theme_override_styles/pressed = SubResource("ModernButtonPressed")
-theme_override_styles/focus = SubResource("ButtonFocus")
-text = "SALIR"
-
-[node name="ControlsLabel" type="Label" parent="."]
-offset_left = 16.0
-offset_top = 18.0
-offset_right = 464.0
-offset_bottom = 28.0
-theme_override_font_sizes/font_size = 5
-theme_override_colors/font_color = Color(0.62, 0.65, 0.72, 1)
-horizontal_alignment = 1
-text = "Flechas: moverte | Espacio: dash | Clic/J: disparar | Esc: pausa"
-
-[node name="CreditsLabel" type="Label" parent="."]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_bottom = -14.0
-theme_override_font_sizes/font_size = 6
-theme_override_colors/font_color = Color(0.75, 0.77, 0.83, 1)
-horizontal_alignment = 1
-text = "Assets: Modern Interiors Free v2.2 (uso no comercial)
-Fuente: Press Start 2P (OFL) | Audio generado para este proyecto"
+text = "EMPEZAR"
 
 [node name="Scanlines" type="TextureRect" parent="."]
 offset_right = 480.0
 offset_bottom = 270.0
 mouse_filter = 2
-texture = ExtResource("8")
+texture = ExtResource("3")
 expand_mode = 1
 stretch_mode = 1
 
@@ -244,14 +81,4 @@ offset_bottom = 267.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
 
-[node name="FrameInner" type="Panel" parent="."]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 472.0
-offset_bottom = 262.0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_frame_inner")
-
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

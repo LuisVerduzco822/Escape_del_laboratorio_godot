@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/autoload/AudioManager.gd" id="1"]
 [ext_resource type="AudioStream" path="res://assets/audio/music_background.mp3" id="2"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx_dash.wav" id="3"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx_coin.wav" id="4"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx_hit.wav" id="5"]
-[ext_resource type="AudioStream" path="res://assets/audio/sfx_shoot.wav" id="6"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx_victory.wav" id="7"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx_gameover.wav" id="8"]
 
@@ -16,7 +15,7 @@ script = ExtResource("1")
 stream = ExtResource("2")
 volume_db = -10.0
 
-[node name="SFXDash" type="AudioStreamPlayer" parent="."]
+[node name="SFXJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3")
 
 [node name="SFXCoin" type="AudioStreamPlayer" parent="."]
@@ -24,9 +23,6 @@ stream = ExtResource("4")
 
 [node name="SFXHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5")
-
-[node name="SFXShoot" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6")
 
 [node name="SFXVictory" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7")

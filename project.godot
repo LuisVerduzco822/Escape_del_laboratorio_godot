@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Escape del Laboratorio"
-config/description="Juego top-down 2D para presentacion escolar. Movimiento en 4 direcciones, dash, disparo, 3 niveles."
+config/description="Juego de plataformas 2D: salta, esquiva bolas de fuego y recoge monedas en 3 niveles."
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://scripts/autoload/GameManager.gd"
+GameManager="*res://scenes/autoload/GameManager.tscn"
 AudioManager="*res://scenes/autoload/AudioManager.tscn"
 
 [display]
@@ -28,7 +28,23 @@ window/size/viewport_height=270
 window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
+
+[dotnet]
+
+project/assembly_name="Escape del Laboratorio"
+
+[gui]
+
+theme/custom="res://scenes/ui/GameTheme.tres"
+
+[input]
+
+jump={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194320,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [rendering]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpbyfgf8tyfya"]
+[gd_scene load_steps=9 format=3 uid="uid://ntu2vrgq6acy"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/MainMenu.tscn" id="2"]
@@ -7,19 +7,6 @@
 [ext_resource type="PackedScene" path="res://scenes/levels/Level1.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/levels/Level2.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://scenes/levels/Level3.tscn" id="7"]
-[ext_resource type="FontFile" uid="uid://do7l34kmr4t4l" path="res://assets/fonts/PressStart2P-Regular.ttf" id="8"]
-
-[sub_resource type="StyleBoxFlat" id="ButtonFocus"]
-bg_color = Color(0, 0, 0, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.82, 0.22, 1)
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_endframe"]
 bg_color = Color(0, 0, 0, 0)
@@ -32,13 +19,30 @@ border_color = Color(0.86, 0.71, 0.25, 1)
 [node name="Main" type="Node2D"]
 script = ExtResource("1")
 level_scenes = Array[PackedScene]([ExtResource("5"), ExtResource("6"), ExtResource("7")])
-pixel_font = ExtResource("8")
 
 [node name="LevelHolder" type="Node2D" parent="."]
 
 [node name="MenuLayer" parent="." instance=ExtResource("2")]
 
 [node name="HUDLayer" parent="." instance=ExtResource("3")]
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+visible = false
+
+[node name="PauseLabel" type="Label" parent="PauseLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "PAUSA
+ESC para continuar"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="EndLayer" type="CanvasLayer" parent="."]
 
@@ -54,40 +58,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EndLayer/CenterContainer"]
-custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
 [node name="TitleStack" type="Control" parent="EndLayer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(440, 52)
+custom_minimum_size = Vector2(280, 34)
 layout_mode = 2
 
 [node name="TitleShadow" type="Label" parent="EndLayer/CenterContainer/VBoxContainer/TitleStack"]
 layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 3.0
-offset_right = 2.0
-offset_bottom = 3.0
+offset_right = 282.0
+offset_bottom = 37.0
 theme_override_colors/font_color = Color(0.05, 0.05, 0.08, 1)
 theme_override_font_sizes/font_size = 13
 text = "GAME OVER"
 horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
 
 [node name="TitleLabel" type="Label" parent="EndLayer/CenterContainer/VBoxContainer/TitleStack"]
 layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_right = 280.0
+offset_bottom = 34.0
 theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
 theme_override_font_sizes/font_size = 13
 text = "GAME OVER"
 horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
 
 [node name="ScoreSummaryLabel" type="Label" parent="EndLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -103,13 +100,11 @@ layout_mode = 2
 [node name="RetryButton" type="Button" parent="EndLayer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(180, 36)
 layout_mode = 2
-theme_override_styles/focus = SubResource("ButtonFocus")
 text = "REINTENTAR"
 
 [node name="MenuButton" type="Button" parent="EndLayer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(180, 36)
 layout_mode = 2
-theme_override_styles/focus = SubResource("ButtonFocus")
 text = "MENÚ PRINCIPAL"
 
 [node name="EndScanlines" type="TextureRect" parent="EndLayer"]

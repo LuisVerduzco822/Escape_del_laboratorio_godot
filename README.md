@@ -1,72 +1,129 @@
-# Escape del Laboratorio — Proyecto Godot 4
+# Escapa del Laboratorio — Plataformas 2D (Godot 4)
 
-Juego top-down 2D (Godot 4, GDScript) hecho con el pack **Modern Interiors Free v2.2**.
+Juego de plataformas estilo Mario Bros (GDScript, Godot 4): te mueves
+y saltas sobre una pasarela metálica fija, esquivas o pisas bolas de
+fuego que avanzan desde la derecha, y recolectas monedas.
 
 ## Cómo abrirlo
 1. Descomprime el .zip.
 2. Godot 4 → **Importar** → selecciona `project.godot`.
 3. Espera a que termine de importar y presiona **F5**.
 
-Probado sin errores en la primera importación con **Godot 4.3 y 4.4.1** en modo headless (importación, recorrido completo de los 3 niveles, disparo, dash, colisiones, audio y fuente). La fuente y el audio se cargan por código (no por `preload`) para evitar el error típico de "recurso no importado todavía" la primera vez que se abre un proyecto nuevo — esto es independiente de la versión de Godot 4.x.
+Probado sin errores en la primera importación con **Godot 4.4.1** en
+modo headless (importación, físicas de salto/pisotón/golpe lateral,
+monedas, spawner de enemigos, progresión de los 3 niveles) y con
+capturas de pantalla reales del motor (no mockups) para verificar
+que todo se vea bien.
 
 ## Controles
 | Acción | Tecla |
 |---|---|
-| Moverse | Flechas |
-| Dash | Espacio o Shift |
-| Disparar | Clic izquierdo o J |
+| Moverse | Flechas izquierda/derecha |
+| Saltar | Espacio o flecha arriba |
 | Pausa | Esc |
+| Menús | Flechas arriba/abajo o Tab para elegir; Enter o Espacio para activar |
 
 ## Cómo se juega
-Recolecta **todas las estrellas** del nivel: la salida está **roja (CERRADA)** hasta que las tengas todas, y se pone **verde (SALIDA)** al completarlas. Los enemigos patrullan y quitan una vida al tocarte (4 vidas). Puedes dispararles; las balas se detienen contra los muebles/paredes. Al terminar el nivel 3 ganas.
+- Las bolas de fuego aparecen por el borde derecho y avanzan en línea
+  recta hacia la izquierda sobre la pasarela.
+- **Salta sobre una bola de fuego** (cayendo desde arriba) para
+  destruirla y rebotar.
+- **Si la tocas de lado**, pierdes al instante y aparece la pantalla
+  de Game Over.
+- Recolecta todas las monedas del nivel para pasar al siguiente. Al
+  completar el nivel 3 ganas.
 
 ## Niveles y dificultad
-| Nivel | Dificultad | Diseño | Estrellas | Enemigos |
+| Nivel | Fondo | Enemigos | Velocidad | Monedas |
 |---|---|---|---|---|
-| 1 | Fácil | 1 sala | 3 | 2 lentos |
-| 2 | Medio | 2 salas + 1 pasillo | 5 | 4 (uno en el pasillo) |
-| 3 | Difícil | 3 salas + 2 pasillos | 6 | 8 (varios resisten 2 disparos) |
+| 1 Fácil | Laboratorio (tanques) | 1 cada 3 s | 120 px/s | 5 |
+| 2 Medio | Alcantarillado | 1 cada 2 s | 170 px/s | 6 |
+| 3 Difícil | Azotea nocturna | 1 cada 1 s + ráfagas | 230 px/s | 7 |
 
-La cámara sigue al jugador con suavizado en los niveles 2 y 3 (más anchos que la pantalla).
+## Assets utilizados (los que subiste)
+- **Fondos:** `nivel1.jfif` (laboratorio), `nivel2.jpg` (alcantarillado)
+  y `nivel3.jfif` (azotea) — uno por nivel, a pantalla completa.
+- **Enemigo:** tu sprite `Enemy.png` (bola de fuego), usado tal cual
+  en `Fireball.tscn`.
+- **Fuente:** `PressStart2P-Regular.ttf`, asignada al tema editable
+  `scenes/ui/GameTheme.tres`.
+- El jugador sigue usando el sprite "Adam" (del pack Modern
+  Interiors que ya tenías en el proyecto) con sus animaciones de
+  caminar/quieto; no se pidió cambiarlo.
+- La moneda reutiliza el ícono de estrella dorada que ya estaba en
+  el proyecto (`assets/decor/star_item.png`).
 
-## Arte y recursos usados del pack
-- **Personajes:** Adam (jugador), Bob, Alex y Amelia (enemigos), con animaciones idle/run en 4 direcciones.
-- **Paredes:** una textura distinta por nivel (panel crema nivel 1, piedra nivel 2, azulejo nivel 3) más una textura de ladrillo exclusiva para los pasillos, todas recortadas del Room Builder.
-- **Objetos del tileset de interiores:** estrella coleccionable, alfombras, escritorios, armarios (con colisión, actúan como obstáculos), plantas, lámparas de pie y de mesa, globo terráqueo, silla y la flecha indicadora de los pasillos.
-- Todo el mobiliario tiene colisión real y se dibuja ordenado por profundidad (y-sort); los personajes proyectan sombra.
-
-## Interfaz y estilo retro
-- **Fuente:** Press Start 2P (licencia OFL), aplicada a todo el juego por código en `Main.gd`.
-- **Portada:** marco tipo arcade (borde dorado + línea cian), scanlines estilo CRT, título con sombra y brillo pulsante, y los 4 personajes ilustrados a los lados.
-- **Pantalla de victoria/derrota:** mismo tratamiento (marco, scanlines, sombra de título).
-- **HUD:** barra de vidas con estados verde (4), azul (3), amarillo (2), rojo (1) y vacía (0), cifra exacta de vidas, puntos, nivel actual (n/3) y estrellas restantes. Al perder la última vida, el nivel se congela y la pantalla de derrota aparece cuando termina el sonido. La barra de disparos de `bdragon1727` muestra 8 cargas; al gastarlas, se recarga automáticamente en 1,5 segundos y no permite disparar durante la recarga.
-- **Botones:** menús principal y final con el estilo de `toffeecraft`.
-
-## Audio
-Música de fondo en loop y 6 efectos (moneda, golpe, dash, disparo, victoria, game over). Para cambiar una pista o su volumen desde Godot, abre `scenes/autoload/AudioManager.tscn` y selecciona el nodo `MusicPlayer` o el efecto correspondiente; edita `Stream` y `Volume Db` en el Inspector. Los efectos fueron generados para este proyecto; la música actual es un MP3 añadido posteriormente.
-
-La fuente y las escenas de los tres niveles se cambian en el Inspector de `scenes/Main.tscn` (nodo `Main`); la escena del proyectil se cambia en `scenes/player/Player.tscn` (nodo `Player`).
+## Lógica de pisotón vs. golpe lateral
+`Fireball.gd` decide el resultado al tocar al jugador comparando su
+velocidad vertical y posición: si el jugador está cayendo
+(`velocity.y > 0`) y sus pies siguen por encima del centro de la
+bola de fuego, es un pisotón (la bola se destruye y el jugador
+rebota); en cualquier otro caso (de lado o por debajo) es golpe
+lateral y pierde. Verificado con pruebas automáticas para ambos
+casos.
 
 ## Estructura
 ```
-assets/  audio, characters, decor, fonts, tiles, ui (scanlines)
-scenes/  Main, ui/, player/, enemy/, item/, levels/
-scripts/ autoload/ (GameManager, AudioManager), util/, player/, enemy/, item/, levels/, ui/, Main.gd
+assets/
+  backgrounds/  level1_bg.png, level2_bg.png, level3_bg.png
+  enemies/      Fireball.png
+  fonts/        PressStart2P-Regular.ttf
+  characters/   Adam (jugador)
+  decor/        star_item.png (moneda)
+  audio/        música + efectos (ya generados, conectados)
+scenes/
+  Main.tscn, ui/MainMenu.tscn, ui/HUD.tscn
+  player/Player.tscn, enemy/Fireball.tscn, item/Coin.tscn
+  levels/Level1.tscn, Level2.tscn, Level3.tscn
+scripts/
+  autoload/GameManager.gd   (monedas, nivel, puntos, señales)
+  autoload/AudioManager.gd  (música + efectos)
+  player/Player.gd          (movimiento, gravedad, salto)
+  enemy/Fireball.gd         (movimiento + pisotón/golpe)
+  item/Coin.gd
+  levels/LevelBase.gd       (fondo, piso, spawner, monedas)
+  ui/MainMenu.gd, ui/HUD.gd, Main.gd
 ```
 
+## Ajustes desde el Inspector
+- `scenes/Main.tscn`: lista ordenada de niveles. El total del HUD se
+  actualiza con esa lista.
+- `scenes/player/Player.tscn`: animaciones del personaje; en su nodo
+  raíz, velocidad, gravedad, salto y rebote.
+- `scenes/levels/Level1.tscn` (igual en los otros niveles): escena de
+  bola de fuego, intervalo, velocidad, ráfagas, monedas y marcador
+  `FireballSpawn`.
+- `scenes/autoload/AudioManager.tscn`: música y efectos en cada
+  `AudioStreamPlayer`.
+- `scenes/ui/GameTheme.tres`: fuente y apariencia de botones.
+- `project.godot` → **Mapa de entrada**: acción `jump`.
+
+## Decisión de diseño (no especificada en el pedido)
+No se indicó cómo se gana cada nivel, así que: **recolectar todas
+las monedas del nivel hace que se cargue automáticamente el
+siguiente** (y el nivel 3 lleva a la pantalla de victoria). Si
+prefieres otro criterio (ej. sobrevivir un tiempo fijo, o cruzar
+una meta), es un cambio pequeño en `LevelBase.gd`.
+
 ## Verificación realizada
-- Importación limpia (sin errores) en Godot 4.3 y 4.4.1, ambas a la primera.
-- Recorrido automático completo de los 3 niveles: cruce de pasillos, recolección de estrellas por contacto real, salida cerrada→abierta, y victoria final.
-- Derrota por contacto con enemigos, pausa (Esc), disparo destruyendo enemigos, dash, y balas detenidas por muebles.
-- Verificación por búsqueda de rutas (BFS) de que las estrellas y la salida son alcanzables caminando en los 3 niveles.
-- Fuente y audio verificados como correctamente cargados y reproduciéndose.
+- Importación limpia (sin errores) en Godot 4.4.1.
+- Jugador cae y se asienta en el piso por gravedad; salto alcanza
+  ~100px de altura (suficiente para pasar por encima de una bola de
+  fuego).
+- Pisotón destruye al enemigo y hace rebotar al jugador; golpe
+  lateral dispara Game Over — ambos probados por separado.
+- Monedas suman al contador por contacto real y se eliminan de la
+  escena.
+- El spawner genera bolas de fuego y estas se autodestruyen al
+  salir por la izquierda.
+- Progresión automática confirmada hasta la victoria en el nivel 3.
+- Capturas de pantalla reales (motor Godot vía Xvfb + Mesa) de
+  portada, los 3 niveles, una bola de fuego en pantalla y Game Over.
 
 ## Licencias
-- Pack Modern Interiors Free v2.2: uso no comercial (`assets/ASSETS_LICENSE.txt`).
-- Press Start 2P: SIL OFL 1.1 (`assets/fonts/OFL.txt`).
-- Efectos de sonido: generados para este proyecto.
-
-## Créditos de recursos externos
-- **Música de fondo actual** (`music_background.mp3`, no la versión `alt`): [Retro Synthwave Music Pack — Swarajthegreat](https://swarajthegreat.itch.io/retro-synthwave-music-pack). Licencia CC0 según la página del autor.
-- **Botones de la interfaz:** [UI User Interface Pack - Simple — ToffeeCraft](https://toffeecraft.itch.io/ui-user-interface-pack-fresh-and-modern). Uso personal y comercial permitido; no redistribuir los recursos por separado.
-- **Barras de vidas y disparos:** [Basic Pixel Health bar and Scroll bar — BDragon1727](https://bdragon1727.itch.io/basic-pixel-health-bar-and-scroll-bar). Uso gratuito en juegos no comerciales; no revender ni redistribuir los recursos por separado.
+- Fondos, sprite de enemigo y fuente: los que subiste (Press Start 2P
+  bajo SIL OFL 1.1, incluida en `assets/fonts/OFL.txt` si la trae el
+  zip original).
+- Pack "Modern Interiors Free v2.2" (solo el personaje Adam, usado
+  como jugador): uso no comercial.
+- Audio: generado para este proyecto, sin restricciones.
